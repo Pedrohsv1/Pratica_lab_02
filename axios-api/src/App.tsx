@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const AppNavBar = () => {
@@ -11,7 +9,7 @@ const AppNavBar = () => {
   )
 }
 
-const AppUFLista = (props: {nameHandle: (nameUF: any) => void, siglaHandle: (siglaUF: any) => void}) => {
+const AppUFLista = (props: any) => {
   const list = [
     {id: 1, name: 'Piaui', sigla: 'PI'},
     {id: 2, name: 'São Paulo', sigla: 'SP'},
@@ -53,18 +51,11 @@ function App() {
   const [name, setName] = useState('name')
 
 
-  const setNames = ( nameUF: any ) => {
-    setName(nameUF)
-  }
-  const setSiglas = ( siglaUF: any ) => {
-    setSigla(siglaUF)
-  }
-
   return (
     <>
-      <AppNavBar nameHandle={setNames} siglaHandle={setSiglas}/>
+      <AppNavBar />
       <AppUFDetalhes sigla={sigla} name={name}/>
-      <AppUFLista />
+      <AppUFLista siglaHandle={(e: string) => {setSigla(e)}} nameHandle={(e: string) => {setName(e)}}/>
     </>
   )
 }

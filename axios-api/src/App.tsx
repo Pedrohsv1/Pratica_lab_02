@@ -16,7 +16,7 @@ const AppUFLista = (props: any) => {
   //   {id: 2, nome: 'São Paulo', sigla: 'SP'},
   // ]
 
-  const [ufs, setUfs] = useState(null) 
+  const [ufs, setUfs] = useState<any>(null) 
   
   useEffect(() => {
     axios.get('https://infoweb-api.vercel.app/uf').then((response) => {
@@ -37,7 +37,7 @@ const AppUFLista = (props: any) => {
 
   return (
     <div>
-      {ufs && ufs.data.map((uf) => (
+      {ufs && ufs.data.map((uf: any) => (
         <button key={uf.id} onClick={() => {props.nameHandle(uf.nome); props.siglaHandle(uf.sigla);}}>
           <h3>{uf.sigla}</h3>
         </button>

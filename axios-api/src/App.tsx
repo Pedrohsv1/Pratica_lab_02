@@ -5,7 +5,7 @@ import './App.css'
 const AppNavBar = () => {
   return(
     <>
-      <h1>Escolha um estado!</h1>
+      <h1>Escolha uma sigla!</h1>
     </>
   )
 }
@@ -15,17 +15,21 @@ const AppUFLista = (props: any) => {
   //   {id: 1, nome: 'Piaui', sigla: 'PI'},
   //   {id: 2, nome: 'São Paulo', sigla: 'SP'},
   // ]
-
+  const [carregar, setCarregar] = useState(false)
   const [ufs, setUfs] = useState<any>(null) 
   
   useEffect(() => {
-    axios.get('https://infoweb-api.vercel.app/uf').then((response) => {
-      setUfs(response.data);
-    });
-  }, []);
+    if(carregar)
+    {
+      axios.get('https://infoweb-api.vercel.app/uf').then((response) => {
+        setUfs(response.data);
+      });
+    }
+
+  }, [carregar]);
 
 
-  // const [sigla, setSigla] = useState('sigla')
+
   // const [name, setName] = useState('name')
 
   // const handleSave = () => {
@@ -36,7 +40,10 @@ const AppUFLista = (props: any) => {
 
 
   return (
-    <div>
+    <div style={{display: 'flex', flexWrap: 'wrap', gap: '1em', alignItems: 'center', justifyContent: 'center'}}>
+      {carregar === false &&
+        <button onClick={() => setCarregar(true)}>Carregar Estados</button>
+      }
       {ufs && ufs.data.map((uf: any) => (
         <button key={uf.id} onClick={() => {props.nameHandle(uf.nome); props.siglaHandle(uf.sigla);}}>
           <h3>{uf.sigla}</h3>
@@ -50,7 +57,7 @@ const AppUFLista = (props: any) => {
 const AppUFDetalhes= (props: {sigla: string, name: string}) => {
   return (
     <div>
-      <h3>{props.sigla} - {props.name}</h3>
+      <h2>{props.sigla} - {props.name}</h2>
     </div>
   )
 }

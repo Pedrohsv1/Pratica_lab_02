@@ -5,16 +5,16 @@ import './App.css'
 const AppNavBar = () => {
   return(
     <>
-    <h1>Titulo Fixo</h1>
+      <h1>Titulo Fixo</h1>
     </>
   )
 }
 
 const AppUFLista = (props: any) => {
-  const list = [
-    {id: 1, nome: 'Piaui', sigla: 'PI'},
-    {id: 2, nome: 'São Paulo', sigla: 'SP'},
-  ]
+  // const list = [
+  //   {id: 1, nome: 'Piaui', sigla: 'PI'},
+  //   {id: 2, nome: 'São Paulo', sigla: 'SP'},
+  // ]
 
   const [ufs, setUfs] = useState(null) 
   
@@ -25,8 +25,8 @@ const AppUFLista = (props: any) => {
   }, []);
 
 
-  const [sigla, setSigla] = useState('sigla')
-  const [name, setName] = useState('name')
+  // const [sigla, setSigla] = useState('sigla')
+  // const [name, setName] = useState('name')
 
   // const handleSave = () => {
   //   console.log(name, sigla);

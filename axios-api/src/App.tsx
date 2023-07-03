@@ -5,7 +5,7 @@ import './App.css'
 const AppNavBar = () => {
   return(
     <>
-      <h1>Titulo Fixo</h1>
+      <h1>Escolha um estado!</h1>
     </>
   )
 }

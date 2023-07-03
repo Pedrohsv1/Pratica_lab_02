@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from '../node_modules/axios/index'
 import './App.css'
 
 const AppNavBar = () => {
@@ -11,24 +12,33 @@ const AppNavBar = () => {
 
 const AppUFLista = (props: any) => {
   const list = [
-    {id: 1, name: 'Piaui', sigla: 'PI'},
-    {id: 2, name: 'São Paulo', sigla: 'SP'},
+    {id: 1, nome: 'Piaui', sigla: 'PI'},
+    {id: 2, nome: 'São Paulo', sigla: 'SP'},
   ]
+
+  const [ufs, setUfs] = useState(null) 
+  
+  useEffect(() => {
+    axios.get('https://infoweb-api.vercel.app/uf').then((response) => {
+      setUfs(response.data);
+    });
+  }, []);
+
 
   const [sigla, setSigla] = useState('sigla')
   const [name, setName] = useState('name')
 
-  const handleSave = () => {
-    console.log(name, sigla);
-    props.nameHandle(name);
-    props.siglaHandle(sigla);
-  }
+  // const handleSave = () => {
+  //   console.log(name, sigla);
+  //   props.nameHandle(name);
+  //   props.siglaHandle(sigla);
+  // }
 
 
   return (
     <div>
-      {list.map((uf) => (
-        <button key={uf.id} onClick={() => {setName(uf.name); setSigla(uf.sigla); handleSave()}}>
+      {ufs && ufs.data.map((uf) => (
+        <button key={uf.id} onClick={() => {props.nameHandle(uf.nome); props.siglaHandle(uf.sigla);}}>
           <h3>{uf.sigla}</h3>
         </button>
       ))
